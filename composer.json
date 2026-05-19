@@ -1,0 +1,21 @@
+{
+    "name": "abelohost/test-app",
+    "description": "Test app for \"abelohost\" company",
+    "type": "project",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Abelohost\\TestApp\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aleksandr K."
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "smarty/smarty": "^5.8",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
