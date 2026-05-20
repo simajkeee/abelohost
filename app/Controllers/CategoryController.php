@@ -40,7 +40,7 @@ class CategoryController extends Controller
             $page = 1;
         }
 
-        $perPage = (int) $this->request->getParameter('per_page', 10);
+        $perPage = (int) $this->request->getParameter('per_page', 8);
         if ($perPage < 3) {
             $perPage = 3;
         } elseif ($perPage > 20) {
