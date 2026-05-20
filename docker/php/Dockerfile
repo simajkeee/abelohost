@@ -11,5 +11,8 @@ RUN apt-get update && apt-get install -y \
 # Install Composer from the official image
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+# Hide PHP version details from HTTP response headers
+COPY conf.d/security.ini /usr/local/etc/php/conf.d/security.ini
+
 # Set the working directory
 WORKDIR /var/www/html
