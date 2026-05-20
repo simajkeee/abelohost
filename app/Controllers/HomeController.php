@@ -6,17 +6,15 @@ namespace Abelohost\TestApp\Controllers;
 
 use Abelohost\TestApp\Core\Controller;
 use Abelohost\TestApp\Core\View;
-use Abelohost\TestApp\Repositories\ArticleRepository;
 use Abelohost\TestApp\Repositories\CategoryRepository;
-use Abelohost\TestApp\Services\Request;
+use Abelohost\TestApp\Services\ArticlesMapper;
 
 class HomeController extends Controller
 {
     public function __construct(
         View $view,
-        private readonly Request $request,
+        private readonly ArticlesMapper $mapper,
         private readonly CategoryRepository $categoryRepo,
-        private readonly ArticleRepository $articleRepo,
     )
     {
         parent::__construct($view);
@@ -24,18 +22,12 @@ class HomeController extends Controller
 
     public function index(): void
     {
-        $limit = (int) $this->request->getParameter('limit', 3);
-        if ($limit < 1) {
-            $limit = 3;
-        }
-
-        if ($limit > 20) {
-            $limit = 20;
-        }
+        $categoriesWithArticles = $this->mapper->flattenCategoriesWithLatestArticles(
+            $this->categoryRepo->getCategoriesWithLatestArticles()
+        );
 
         $this->render('home.tpl', [
-            'categories' => $this->categoryRepo->getAll(),
-            'latestArticles' => $this->articleRepo->getLatest($limit),
+            'categoriesWithArticles' => $categoriesWithArticles,
         ]);
     }
 }
