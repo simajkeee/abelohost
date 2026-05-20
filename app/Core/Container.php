@@ -11,7 +11,6 @@ use Abelohost\TestApp\Factories\ConnectionFactory;
 use Abelohost\TestApp\Repositories\ArticleRepository;
 use Abelohost\TestApp\Repositories\CategoryRepository;
 use Abelohost\TestApp\Services\HomePageDataMapper;
-use Abelohost\TestApp\Services\Request;
 use PDO;
 
 class Container

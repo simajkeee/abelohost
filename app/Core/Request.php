@@ -1,6 +1,6 @@
 <?php
 
-namespace Abelohost\TestApp\Services;
+namespace Abelohost\TestApp\Core;
 
 class Request
 {

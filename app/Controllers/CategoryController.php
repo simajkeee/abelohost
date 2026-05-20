@@ -9,7 +9,7 @@ use Abelohost\TestApp\Core\View;
 use Abelohost\TestApp\Exceptions\HttpNotFoundException;
 use Abelohost\TestApp\Repositories\ArticleRepository;
 use Abelohost\TestApp\Repositories\CategoryRepository;
-use Abelohost\TestApp\Services\Request;
+use Abelohost\TestApp\Core\Request;
 
 class CategoryController extends Controller
 {
