@@ -6,10 +6,10 @@ namespace Abelohost\TestApp\Controllers;
 
 use Abelohost\TestApp\Core\Controller;
 use Abelohost\TestApp\Core\View;
+use Abelohost\TestApp\Exceptions\HttpNotFoundException;
 use Abelohost\TestApp\Repositories\ArticleRepository;
 use Abelohost\TestApp\Repositories\CategoryRepository;
 use Abelohost\TestApp\Services\Request;
-use RuntimeException;
 
 class CategoryController extends Controller
 {
@@ -27,12 +27,12 @@ class CategoryController extends Controller
     {
         $categoryId = $this->request->getParameter('id', null);
         if (null === $categoryId) {
-            throw new RuntimeException('404 Not found', 404);
+            throw new HttpNotFoundException();
         }
 
         $category = $this->categoryRepo->findById((int)$categoryId);
         if (empty($category)) {
-            throw new RuntimeException('404 Not found', 404);
+            throw new HttpNotFoundException();
         }
 
         $page = (int) $this->request->getParameter('page', 1);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Abelohost\TestApp\Core;
 
+use Abelohost\TestApp\Controllers\ArticleController;
 use Abelohost\TestApp\Controllers\CategoryController;
 use Abelohost\TestApp\Controllers\HomeController;
 use Abelohost\TestApp\Factories\ConnectionFactory;
@@ -26,7 +27,7 @@ class App
 
         $router->get('/', [new HomeController($view, $request, $categoryRepository, $articleRepository), 'index']);
         $router->get('/category', [new CategoryController($view, $request, $categoryRepository, $articleRepository), 'show']);
-//        $router->get('/article', [new ArticleController($view, $categoryRepository, $articleRepository), 'show']);
+        $router->get('/article', [new ArticleController($view, $request, $categoryRepository, $articleRepository), 'show']);
 
         $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
     }
