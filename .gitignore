@@ -1,6 +1,8 @@
+.env
 /data
 /vendor
 /.idea
-/storage/smarty/compile
-
-interanal.md
+/storage/smarty/compile/*
+!/storage/smarty/compile/.gitkeep
+/storage/smarty/cache/*
+!/storage/smarty/cache/.gitkeep
