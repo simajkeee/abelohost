@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Abelohost\TestApp\Core;
 
+use Abelohost\TestApp\Exceptions\HttpNotFoundException;
 use Closure;
-use RuntimeException;
 
 class Router
 {
@@ -23,23 +23,13 @@ class Router
 
         try {
             if (null === $handler) {
-                throw new RuntimeException("404 not found", 404);
+                throw new HttpNotFoundException();
             }
 
             call_user_func($handler);
-        } catch (\Throwable $e) {
-            if ($e->getCode() === 404) {
-                $this->notFound($e->getMessage());
-                return;
-            }
-
-            throw $e;
+        } catch (HttpNotFoundException $e) {
+            http_response_code(404);
+            echo $e->getMessage();
         }
-    }
-
-    private function notFound($msg)
-    {
-        http_response_code(404);
-        echo $msg;
     }
 }
