@@ -1,10 +1,14 @@
-<h1>Blog</h1>
+{extends file="layouts/main.tpl"}
 
-<h2>Latest articles</h2>
+{block name="title"}Home | AbeloHost Blog{/block}
 
-{foreach $latestArticles as $article}
-    <article>
-        <h3>{$article.title|escape}</h3>
-        <p>{$article.description|escape}</p>
-    </article>
-{/foreach}
+{block name="content"}
+    <h1>Latest articles</h1>
+
+    {foreach $latestArticles as $article}
+        <article>
+            <h2>{$article.title|escape}</h2>
+            <p>{$article.description|escape}</p>
+        </article>
+    {/foreach}
+{/block}
