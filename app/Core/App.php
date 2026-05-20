@@ -10,7 +10,7 @@ use Abelohost\TestApp\Controllers\HomeController;
 use Abelohost\TestApp\Factories\ConnectionFactory;
 use Abelohost\TestApp\Repositories\ArticleRepository;
 use Abelohost\TestApp\Repositories\CategoryRepository;
-use Abelohost\TestApp\Services\ArticlesMapper;
+use Abelohost\TestApp\Services\HomePageDataMapper;
 use Abelohost\TestApp\Services\Request;
 
 class App
@@ -26,7 +26,7 @@ class App
 
         $router = new Router();
 
-        $router->get('/', [new HomeController($view, new ArticlesMapper(), $categoryRepository), 'index']);
+        $router->get('/', [new HomeController($view, new HomePageDataMapper(), $categoryRepository), 'index']);
         $router->get('/category', [new CategoryController($view, $request, $categoryRepository, $articleRepository), 'show']);
         $router->get('/article', [new ArticleController($view, $request, $categoryRepository, $articleRepository), 'show']);
 

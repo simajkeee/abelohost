@@ -7,13 +7,13 @@ namespace Abelohost\TestApp\Controllers;
 use Abelohost\TestApp\Core\Controller;
 use Abelohost\TestApp\Core\View;
 use Abelohost\TestApp\Repositories\CategoryRepository;
-use Abelohost\TestApp\Services\ArticlesMapper;
+use Abelohost\TestApp\Services\HomePageDataMapper;
 
 class HomeController extends Controller
 {
     public function __construct(
         View $view,
-        private readonly ArticlesMapper $mapper,
+        private readonly HomePageDataMapper $mapper,
         private readonly CategoryRepository $categoryRepo,
     )
     {

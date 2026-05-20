@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Abelohost\TestApp\Services;
 
-class ArticlesMapper
+class HomePageDataMapper
 {
     public function flattenCategoriesWithLatestArticles(array $categoriesWithArticles): array
     {
