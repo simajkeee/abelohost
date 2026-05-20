@@ -35,16 +35,31 @@ class ArticleRepository extends AbstractRepository
         return $sth->fetch() ?: null;
     }
 
-    public function getByCategory(int $id): array
+    public function getByCategory(int $id, string $sort, int $limit, int $offset): array
     {
-        $sth = $this->pdo->prepare('
-            SELECT a.id, a.image, a.title, a.description, a.content, a.view_count, a.published_at, a.created_at, ac.category_id
-            FROM articles as a
-            INNER JOIN article_category as ac
-            ON ac.article_id = a.id
-            WHERE a.published_at <= NOW() AND ac.category_id = ?
-        ');
-        $sth->execute([$id]);
+        $orderBy = match ($sort) {
+            'views' => 'ORDER BY a.view_count DESC',
+            'date' => 'ORDER BY a.created_at DESC',
+            default => 'ORDER BY a.created_at DESC',
+        };
+
+        $sth = $this->pdo->prepare(
+            sprintf('
+                SELECT a.id, a.image, a.title, a.description, a.content, a.view_count, a.published_at, a.created_at, ac.category_id
+                FROM articles as a
+                INNER JOIN article_category as ac
+                ON ac.article_id = a.id
+                WHERE a.published_at <= NOW() AND ac.category_id = ?
+                %s
+                LIMIT ?
+                OFFSET ?
+            ', $orderBy)
+        );
+
+        $sth->bindValue(1, $id, PDO::PARAM_INT);
+        $sth->bindValue(2, $limit, PDO::PARAM_INT);
+        $sth->bindValue(3, $offset, PDO::PARAM_INT);
+        $sth->execute();
 
         return $sth->fetchAll();
     }
