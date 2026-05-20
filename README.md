@@ -9,6 +9,7 @@ Simple blog website built with pure PHP, MySQL, and Smarty. The app implements c
 - Smarty 5
 - Nginx + PHP-FPM
 - Composer
+- SCSS compiled with Sass
 - Pure PHP, no framework
 
 ## Features
@@ -42,6 +43,12 @@ Install dependencies:
 docker compose exec php composer install
 ```
 
+Install frontend tooling if you want to rebuild styles:
+
+```bash
+npm install
+```
+
 Create the database schema:
 
 ```bash
@@ -52,6 +59,12 @@ Seed categories and articles:
 
 ```bash
 docker compose exec php php bin/seed.php
+```
+
+Rebuild CSS after changing SCSS:
+
+```bash
+make css
 ```
 
 Open the app:

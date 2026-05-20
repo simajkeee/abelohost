@@ -1,6 +1,7 @@
 .env
 /data
 /vendor
+/node_modules
 /.phpunit.cache
 /.idea
 /storage/smarty/compile/*

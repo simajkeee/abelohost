@@ -1,0 +1,268 @@
+$page-bg: #f4f6f8;
+$surface: #ffffff;
+$text: #1c2733;
+$muted: #627084;
+$body-muted: #4b5d73;
+$border: #dfe6ee;
+$border-strong: #cbd6e2;
+$brand: #1769aa;
+$brand-dark: #1f4f7a;
+$brand-soft: #edf6ff;
+$image-bg: #dde5ee;
+$container-width: 1120px;
+$radius: 8px;
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: light;
+}
+
+body {
+    margin: 0;
+    background: $page-bg;
+    color: $text;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: $brand;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+body > header,
+body > footer {
+    background: $surface;
+    border-color: #d9e0e7;
+    border-style: solid;
+}
+
+body > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 18px max(24px, calc((100vw - #{$container-width}) / 2));
+    border-width: 0 0 1px;
+
+    > a {
+        color: #111827;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    nav {
+        display: flex;
+        gap: 16px;
+    }
+}
+
+main {
+    width: min($container-width, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 40px 0 56px;
+}
+
+body > footer {
+    padding: 22px max(24px, calc((100vw - #{$container-width}) / 2));
+    border-width: 1px 0 0;
+    color: $muted;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 28px;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.1;
+}
+
+h2 {
+    margin-bottom: 12px;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+.home-category,
+.category-header,
+.category-articles,
+.article-page,
+.related-articles {
+    margin-bottom: 32px;
+}
+
+.home-category,
+.category-header,
+.article-page {
+    padding: 28px;
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: $radius;
+}
+
+.home-category__header,
+.category-articles__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+.home-category__all-link,
+.category-sort a,
+.pagination a,
+.pagination span,
+.article-page__categories a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 7px 12px;
+    border: 1px solid $border-strong;
+    border-radius: 6px;
+    background: $surface;
+    color: $brand-dark;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home-category__all-link:hover,
+.category-sort a:hover,
+.pagination a:hover,
+.article-page__categories a:hover {
+    background: $brand-soft;
+    text-decoration: none;
+}
+
+.category-sort,
+.pagination,
+.article-page__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-sort a[aria-current="true"],
+.pagination span[aria-current="page"] {
+    background: $brand;
+    border-color: $brand;
+    color: $surface;
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+}
+
+.article-card {
+    overflow: hidden;
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: $radius;
+}
+
+.article-card__image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: $image-bg;
+}
+
+.article-card__body {
+    padding: 18px;
+}
+
+.article-card__title {
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 1.25;
+}
+
+.article-card__description {
+    margin-bottom: 16px;
+    color: $body-muted;
+}
+
+.article-card__meta,
+.article-page__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    color: $muted;
+    font-size: 14px;
+}
+
+.category-header p,
+.article-page__header p {
+    color: $body-muted;
+    font-size: 18px;
+}
+
+.article-page__image {
+    width: 100%;
+    max-height: 480px;
+    margin-bottom: 28px;
+    border-radius: $radius;
+    object-fit: cover;
+    background: $image-bg;
+}
+
+.article-page__header {
+    margin-bottom: 28px;
+}
+
+.article-page__categories {
+    margin-top: 18px;
+}
+
+.article-page__content {
+    color: #243447;
+    font-size: 18px;
+}
+
+.pagination {
+    justify-content: center;
+    margin-top: 28px;
+}
+
+@media (max-width: 700px) {
+    body > header,
+    .home-category__header,
+    .category-articles__header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    body > header {
+        gap: 10px;
+    }
+
+    main {
+        width: min(100% - 24px, $container-width);
+        padding-top: 28px;
+    }
+
+    .home-category,
+    .category-header,
+    .article-page {
+        padding: 20px;
+    }
+}
