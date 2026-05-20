@@ -39,8 +39,7 @@ class ArticleRepository extends AbstractRepository
     {
         $orderBy = match ($sort) {
             'views' => 'ORDER BY a.view_count DESC',
-            'date' => 'ORDER BY a.created_at DESC',
-            default => 'ORDER BY a.created_at DESC',
+            default => 'ORDER BY a.published_at DESC',
         };
 
         $sth = $this->pdo->prepare(

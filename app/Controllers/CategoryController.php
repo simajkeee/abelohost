@@ -47,16 +47,23 @@ class CategoryController extends Controller
             $perPage = 20;
         }
 
-        $sortBy = trim($this->request->getParameter('sort', 'none'));
+        $totalArticles = $this->articleRepo->countByCategory($category['id']);
+        $totalPages = (int) ceil($totalArticles / $perPage);
+        if ($totalPages > 0 && $page > $totalPages) {
+            $page = $totalPages;
+        }
+
+        $sortBy = trim($this->request->getParameter('sort', 'date'));
+        if (!in_array($sortBy, ['date', 'views'], true)) {
+            $sortBy = 'date';
+        }
+
         $articles = $this->articleRepo->getByCategory(
             $category['id'],
             $sortBy,
             $perPage,
             ($page - 1) * $perPage,
         );
-
-        $totalArticles = $this->articleRepo->countByCategory($category['id']);
-        $totalPages = (int) ceil($totalArticles / $perPage);
 
         $this->view->render('category.tpl', [
             'category' => $category,
