@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Abelohost\TestApp\Core;
 
+use PDO;
+
 readonly class Connection
 {
     public function __construct(
@@ -15,12 +17,16 @@ readonly class Connection
     ) {
     }
 
-    public function initialize(): \PDO
+    public function initialize(): PDO
     {
-        return new \PDO(
+        return new PDO(
             "mysql:host={$this->host};port={$this->port};dbname={$this->database};charset=utf8mb4",
             $this->username,
-            $this->password
+            $this->password,
+            [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            ]
         );
     }
 }

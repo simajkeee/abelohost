@@ -16,9 +16,14 @@ class ConnectionFactory
             throw new LogicException("Can't find config/db.php file");
         }
 
-        extract(include_once $dbConfig);
+        $config = include_once $dbConfig;
 
-        return new Connection($host, $port, $database, $username, $password)
-            ->initialize();
+        return new Connection(
+            $config['host'],
+            $config['port'],
+            $config['database'],
+            $config['username'],
+            $config['password'],
+        )->initialize();
     }
 }
