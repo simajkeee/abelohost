@@ -1,6 +1,7 @@
 .env
 /data
 /vendor
+/.phpunit.cache
 /.idea
 /storage/smarty/compile/*
 !/storage/smarty/compile/.gitkeep

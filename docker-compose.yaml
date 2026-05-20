@@ -30,6 +30,7 @@ services:
         MYSQL_PASSWORD: app
       volumes:
         - ./data:/var/lib/mysql
+        - ./docker/mysql/init-test-database.sql:/docker-entrypoint-initdb.d/10-init-test-database.sql:ro
 
 volumes:
   mariadb_data:
