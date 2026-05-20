@@ -11,9 +11,9 @@ class App
         $container = new Container();
         $router = new Router();
 
-        $router->get('/', [$container->homeController(), 'index']);
-        $router->get('/category', [$container->categoryController(), 'show']);
-        $router->get('/article', [$container->articleController(), 'show']);
+        $router->get('/', fn () => $container->homeController()->index());
+        $router->get('/category', fn () => $container->categoryController()->show());
+        $router->get('/article', fn () => $container->articleController()->show());
 
         $router->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
     }

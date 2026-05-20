@@ -24,12 +24,11 @@ class ArticleController extends Controller
 
     public function show()
     {
-        $articleId = $this->request->getParameter('id', null);
-        if (null === $articleId) {
+        $articleId = $this->request->getInt('id');
+        if (null === $articleId || $articleId < 1) {
             throw new HttpNotFoundException();
         }
 
-        $articleId = (int) $articleId;
         $article = $this->articleRepo->findById($articleId);
         if (empty($article)) {
             throw new HttpNotFoundException();

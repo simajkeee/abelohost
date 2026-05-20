@@ -25,22 +25,22 @@ class CategoryController extends Controller
 
     public function show()
     {
-        $categoryId = $this->request->getParameter('id', null);
-        if (null === $categoryId) {
+        $categoryId = $this->request->getInt('id');
+        if (null === $categoryId || $categoryId < 1) {
             throw new HttpNotFoundException();
         }
 
-        $category = $this->categoryRepo->findById((int)$categoryId);
+        $category = $this->categoryRepo->findById($categoryId);
         if (empty($category)) {
             throw new HttpNotFoundException();
         }
 
-        $page = (int) $this->request->getParameter('page', 1);
+        $page = $this->request->getInt('page', 1);
         if ($page < 1) {
             $page = 1;
         }
 
-        $perPage = (int) $this->request->getParameter('per_page', 8);
+        $perPage = $this->request->getInt('per_page', 8);
         if ($perPage < 3) {
             $perPage = 3;
         } elseif ($perPage > 20) {
@@ -53,7 +53,7 @@ class CategoryController extends Controller
             $page = $totalPages;
         }
 
-        $sortBy = trim($this->request->getParameter('sort', 'date'));
+        $sortBy = $this->request->getString('sort', 'date');
         if (!in_array($sortBy, ['date', 'views'], true)) {
             $sortBy = 'date';
         }

@@ -6,6 +6,7 @@ namespace Abelohost\TestApp\Core;
 
 use Abelohost\TestApp\Exceptions\HttpNotFoundException;
 use Closure;
+use Throwable;
 
 class Router
 {
@@ -29,7 +30,11 @@ class Router
             call_user_func($handler);
         } catch (HttpNotFoundException $e) {
             http_response_code(404);
-            echo $e->getMessage();
+            echo '404 not found';
+        } catch (Throwable $e) {
+            error_log($e);
+            http_response_code(500);
+            echo 'Internal server error';
         }
     }
 }
