@@ -17,11 +17,10 @@ class Migration
     public function run(): void
     {
         $schemaPath = APP_ROOT . self::SCHEMA_PATH;
-        if (!file_get_contents($schemaPath)) {
+        $sql = file_get_contents($schemaPath);
+        if ($sql === false || $sql === '') {
             throw new RuntimeException('schema.sql is missing');
         }
-
-        $sql = file_get_contents($schemaPath);
 
         $this->pdo->exec($sql);
     }
